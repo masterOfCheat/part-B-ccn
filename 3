@@ -7,35 +7,35 @@ SERVER:
 #include<string.h>
 int main()
 {
- int sockfd,newsockfd,portno=1234,servlen ,n,fd;
- char buffer[256],c[2000];
- struct sockaddr_in serv_addr;
+   int sockfd,newsockfd,portno=1234,servlen ,n,fd;
+   char buffer[256],c[2000];
+   struct sockaddr_in serv_addr;
 
- sockfd=socket(AF_INET,SOCK_STREAM,0);
- bzero((char *)&serv_addr,sizeof(serv_addr));
+   sockfd=socket(AF_INET,SOCK_STREAM,0);
+   bzero((char *)&serv_addr,sizeof(serv_addr));
 
- serv_addr.sin_family=AF_INET;
- serv_addr.sin_addr.s_addr=INADDR_ANY;
- serv_addr.sin_port=htons(portno);
- bind(sockfd,(struct sockaddr *)&serv_addr,sizeof(serv_addr));
+   serv_addr.sin_family=AF_INET;
+   serv_addr.sin_addr.s_addr=INADDR_ANY;
+   serv_addr.sin_port=htons(portno);
+   bind(sockfd,(struct sockaddr *)&serv_addr,sizeof(serv_addr));
 
- listen(sockfd,5);
+   listen(sockfd,5);
 
-servlen=sizeof(serv_addr);
- printf("SERVER:Waiting for client....\n");
- newsockfd=accept(sockfd,(struct sockaddr *)&serv_addr,&servlen);
- prinf(“ACCEPTED”):
- bzero(buffer,255);
- n=read(newsockfd,buffer,255);
- printf("SERVER: %s\n",buffer);
+   servlen=sizeof(serv_addr);
+   printf("SERVER:Waiting for client....\n");
+   newsockfd=accept(sockfd,(struct sockaddr *)&serv_addr,&servlen);
+   prinf(“ACCEPTED”):
+   bzero(buffer,255);
+   n=read(newsockfd,buffer,255);
+   printf("SERVER: %s\n",buffer);
 
- fd=open(buffer,O_RDONLY,0);
- read(fd,c,255);
- write(newsockfd,c,255);
-close(newsockfd);
-close(sockfd);
-close(fd);
-return 0;
+   fd=open(buffer,O_RDONLY,0);
+   read(fd,c,255);
+   write(newsockfd,c,255);
+   close(newsockfd);
+   close(sockfd);
+   close(fd);
+   return 0;
 }
 
 
@@ -48,10 +48,10 @@ CLIENT:
 #include<string.h>
 int main()
 {
- int sockfd,portno=1234,n; //use same port as the server
- struct sockaddr_in serv_addr;
- struct hostent *server;
- char buffer[256],c[2000];
+  int sockfd,portno=1234,n; //use same port as the server
+  struct sockaddr_in serv_addr;
+  struct hostent *server;
+  char buffer[256],c[2000];
 
 
 
