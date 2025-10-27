@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include<conio.h>
+#include<ctype.h>
+#define N 10
+
+void main() {
+    int g[N][N] = {{0,1,0,0,0,4,0,0,0,0}, {1,0,4,0,0,0,0,1,0,0},
+                   {0,4,0,3,2,0,0,0,3,0}, {0,0,3,0,1,0,0,0,0,0},
+                   {0,0,2,1,0,3,0,0,0,1}, {4,0,0,0,3,0,1,0,0,0},
+                   {0,0,0,0,0,1,0,2,0,2}, {0,1,0,0,0,0,2,0,1,0},
+                   {0,0,3,0,0,0,0,1,0,2}, {0,0,0,0,1,0,2,0,2,0}};
+    
+    int d[N], p[N], v[N], s, e, i, c, m;
+    
+    for(i = 0; i < N; i++) {
+        d[i] = 999;
+        v[i] = 0;
+    }
+    
+    printf("Source: ");
+    s = toupper(getche()) - 'A';
+    printf("\nDestination: ");
+    e = toupper(getche()) - 'A';
+    
+    d[s] = 0;
+    p[s] = -1;
+    c = s;
+    
+    while(c != e) {
+        v[c] = 1;
+        for(i = 0; i < N; i++) {
+            if(g[c][i] != 0 && v[i] == 0 && d[c] + g[c][i] < d[i]) {
+                d[i] = d[c] + g[c][i];
+                p[i] = c;
+            }
+        }
+        
+        m = 999;
+        for(i = 0; i < N; i++) {
+            if(v[i] == 0 && d[i] < m) {
+                m = d[i];
+                c = i;
+            }
+        }
+    }
+    
+    printf("\nPath: %c", e + 'A');
+    i = e;
+    while(i != s) {
+        i = p[i];
+        printf(" <- %c", i + 'A');
+    }
+    printf("\nCost: %d", d[e]);
+    getch();
+}
